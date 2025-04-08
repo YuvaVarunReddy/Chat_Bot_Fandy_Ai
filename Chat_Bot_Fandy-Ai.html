@@ -366,11 +366,23 @@
     </div>
     <!-- Ui-Fandy Bot-Ai End -->
 
+    <audio id="myAudio">
+        <source src="preview.mp3" type="audio/ogg">
+        <!-- <source src="preview.mp3" type="audio/mpeg"> -->
+        Your browser does not support the audio element.
+    </audio>
+
 </body>
 <script>
+
+
     let NewArray = [];
 
     count = 0;
+    let Array1 = ["hello", "hi", "hii"];
+
+
+    let x = document.getElementById("myAudio")
 
 
     function Click() {
@@ -388,22 +400,38 @@
             hour12: true,
         });
 
+        let Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        let day = Days[CurrentDate.getDay()];
+        console.log(day)
+
+
+
         let SentMessage = {
             Msg: Usermsg,
             date: time,
             type: "sent"
         }
-        
+
         NewArray.push(SentMessage);
         count += 1;
 
-        console.log(NewArray.Msg);
+        // console.log(NewArray.Msg);
+
         let ReMsg = "";
 
 
 
-        if (Msg == "hii" || Msg == "hi" || Msg == "hello") {
-            ReMsg = "Hello";
+        if (Array1.includes(Msg)) {
+            ReMsg = "Hello.How can i help you";
+        } else if (Msg == "what is your name") {
+            ReMsg = "I'm Fandy Bot Ai.And you";
+        } else if (Msg == "yuva") {
+            ReMsg = "Ohh Nice " + "&#128522;" + "Yuva is a Nice Name";
+        } else if (Msg == "what is today") {
+            ReMsg = "Today is" + day;
+        } else if (Msg == "what is time right now?") {
+            ReMsg = "Current Time is" + SentMessage.date;
         } else if (Msg == "hey fandy ai, i'm bored.") {
             ReMsg = "Want to play a game or hear a fun fact? I'm full of both!" + "&#128522;";
         } else if (Msg == "what the weather like today") {
@@ -469,7 +497,7 @@
             if (element.type == "sent") {
                 ChatofText += "<div class=\"message user\"><div class=\"avatar user-avatar\">U</div> <div class=\"message-content\">"
                     + element.Msg + '<br>' + element.date + "</div> </div>";
-
+                x.play();
             } else {
                 ChatofText += "<div class=\"message bot\"><div class=\"avatar bot-avatar\">Fandy</div> <div class=\"message-content\">"
                     + element.Msg + '<br>' + element.date + "</div> </div>";
