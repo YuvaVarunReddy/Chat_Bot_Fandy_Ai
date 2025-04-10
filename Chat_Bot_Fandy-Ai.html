@@ -262,7 +262,7 @@
                 0 0 0 1px rgba(255, 255, 255, 0.2);
         }
 
-        input[type="text"] {
+        input {
             flex: 1;
             padding: 0.75rem 1.25rem;
             background: transparent;
@@ -272,7 +272,7 @@
             outline: none;
         }
 
-        input[type="text"]::placeholder {
+        input {
             color: rgba(14, 14, 14, 0.6);
         }
 
@@ -359,7 +359,7 @@
 
         <div class="input-area">
             <div class="input-container">
-                <input type="text" placeholder="Type your message..." id="Txt">
+                <input type="" placeholder="Type your message..." id="Txt">
                 <button type="button" id="btn" onclick="Click1()">➤</button>
             </div>
         </div>
@@ -375,13 +375,12 @@
 </body>
 <script>
 
-
     let NewArray = [];
 
     count = 0;
     let Array1 = ["hello", "hi", "hii"];
 
-    let text = ["today", "what is today"]
+    let text = ["today", "what is today"];
 
     let x = document.getElementById("myAudio");
 
@@ -404,11 +403,60 @@
         return day;
     }
 
+    let num;
+    let num1;
+    let number;
+    function operators() {
 
+        const cal = Usermsg.match(/\d+|\+|\-|\*|\//g);
+
+        for (i = 0; i < cal.length; i++) {
+            if (cal[i] === "*" || cal[i] === "/") {
+                num = Number(cal[i - 1]);
+                num1 = Number(cal[i + 1]);
+
+                if (cal[i] === "*") {
+                    number = num * num1;
+                } else {
+                    number = num / num1;
+                }
+                cal.splice(i - 1, 3, number.toLocaleString())
+                i = -1;
+            }
+
+
+        }
+
+
+        for (i = 0; i < cal.length; i++) {
+            if (cal[i] === "+" || cal[i] === "-") {
+                console.log(cal[i]);
+
+                num = Number(cal[i - 1]);
+                console.log(num);
+
+                num1 = Number(cal[i + 1]);
+                console.log(num1);
+
+                if (cal[i] === "+") {
+                    number = num + num1;
+                    console.log(number);
+
+                } else {
+                    number = num - num1;
+                }
+
+                cal.splice(i - 1, 3, number.toLocaleString())
+                i = -1;
+            }
+
+
+        }
+
+    }
+    let Usermsg
     function Click1() {
-
-
-        let Usermsg = document.getElementById('Txt').value;
+        Usermsg = document.getElementById('Txt').value;
 
         let Msg = Usermsg.toLowerCase();
 
@@ -434,12 +482,7 @@
         NewArray.push(SentMessage);
         count += 1;
 
-        // console.log(NewArray.Msg);
-
         let ReMsg = "";
-        // console.log(text.search(Msg));
-
-
 
         if (Array1.includes(Msg)) {
             ReMsg = "Hello.How can i help you";
@@ -493,7 +536,11 @@
             ReMsg = "Are you kidding?! You're an unstoppable legend in the making! The world ain't ready!";
         } else if (Msg == "okay.then bye see you later!") {
             ReMsg = "Catch you later!" + "&#128075;" + "Take care and come back anytime you want to chat." + "&#128513;";
+        } else if (Usermsg.includes("+") || Usermsg.includes("-") || Usermsg.includes("*") || Usermsg.includes("/")) {
+            operators();
+            ReMsg = number;
         } else {
+
             ReMsg = "Sorry i can't help you right now" + "&#128528";
         }
 
