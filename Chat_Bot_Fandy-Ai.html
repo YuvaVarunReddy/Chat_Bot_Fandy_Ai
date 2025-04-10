@@ -360,7 +360,7 @@
         <div class="input-area">
             <div class="input-container">
                 <input type="text" placeholder="Type your message..." id="Txt">
-                <button type="button" onclick="Click()">➤</button>
+                <button type="button" id="btn" onclick="Click1()">➤</button>
             </div>
         </div>
     </div>
@@ -381,17 +381,41 @@
     count = 0;
     let Array1 = ["hello", "hi", "hii"];
 
+    let text = ["today", "what is today"]
 
-    let x = document.getElementById("myAudio")
+    let x = document.getElementById("myAudio");
+
+    let inputElement = document.getElementById('Txt');
+
+    inputElement.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("btn").click();
+        }
+    });
 
 
-    function Click() {
+    function weeks() {
+        let CurrentDate = new Date();
+
+        let Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        let day = Days[CurrentDate.getDay()];
+        return day;
+    }
+
+
+    function Click1() {
 
 
         let Usermsg = document.getElementById('Txt').value;
+
         let Msg = Usermsg.toLowerCase();
+
+
         document.getElementById('Txt').value = "";
         console.log(Msg);
+
 
         let CurrentDate = new Date();
         var time = CurrentDate.toLocaleTimeString([], {
@@ -399,12 +423,6 @@
             minute: "2-digit",
             hour12: true,
         });
-
-        let Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-        let day = Days[CurrentDate.getDay()];
-        console.log(day)
-
 
 
         let SentMessage = {
@@ -419,6 +437,7 @@
         // console.log(NewArray.Msg);
 
         let ReMsg = "";
+        // console.log(text.search(Msg));
 
 
 
@@ -428,8 +447,8 @@
             ReMsg = "I'm Fandy Bot Ai.And you";
         } else if (Msg == "yuva") {
             ReMsg = "Ohh Nice " + "&#128522;" + "Yuva is a Nice Name";
-        } else if (Msg == "what is today") {
-            ReMsg = "Today is" + day;
+        } else if (text.includes(Msg)) {
+            ReMsg = "Today is" + weeks();
         } else if (Msg == "what is time right now?") {
             ReMsg = "Current Time is" + SentMessage.date;
         } else if (Msg == "hey fandy ai, i'm bored.") {
