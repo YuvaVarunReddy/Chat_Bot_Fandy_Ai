@@ -218,7 +218,7 @@
                     rgba(255, 255, 255, 0.1),
                     rgba(255, 255, 255, 0.05));
             border-radius: 0 1rem 1rem 1rem;
-            color: white;
+            color: black;
         }
 
         .user .message-content {
@@ -226,7 +226,7 @@
                     rgba(14, 165, 233, 0.15),
                     rgba(13, 148, 136, 0.1));
             border-radius: 1rem 0 1rem 1rem;
-            color: white;
+            color: black;
         }
 
         .input-area {
@@ -280,7 +280,7 @@
             background: linear-gradient(135deg,
                     rgb(117, 158, 158),
                     rgba(120, 172, 172, 0.2));
-            color: white;
+            color: black;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 9999px;
             padding: 0.75rem;
@@ -382,6 +382,8 @@
 
     let text = ["today", "what is today"];
 
+    let age = ["please tell me my age", "age", "what's my age"];
+
     let x = document.getElementById("myAudio");
 
     let inputElement = document.getElementById('Txt');
@@ -393,9 +395,10 @@
         }
     });
 
+    var CurrentDate = new Date();
 
     function weeks() {
-        let CurrentDate = new Date();
+
 
         let Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -454,16 +457,44 @@
         }
 
     }
-    let Usermsg
+    let DateofBirth = "";
+    let today;
+    function GetDateofBirth(UserMsg) {
+
+        let birth;
+
+        birth = Usermsg.split("/");
+
+        console.log(birth[0]);
+        var DateofBirth = birth[0] + birth[1] + birth[2];
+
+       
+
+
+
+        var CurrentDate = new Date();
+        var year = Number(DateofBirth.substr(0, 4));
+        var month = Number(DateofBirth.substr(0, 1)) - 1;
+        console.log(month);
+        var day = Number(DateofBirth.substr(0, 1));
+        console.log(day);
+        var Age = CurrentDate.getFullYear() - year;
+
+        if (CurrentDate.getMonth() < month || (CurrentDate.getMonth() == month && CurrentDate.getDate() < day)) {
+            Age--;
+        }
+        // console.log(Age);
+
+        return Age;
+
+    }
+
     function Click1() {
         Usermsg = document.getElementById('Txt').value;
-
         let Msg = Usermsg.toLowerCase();
-
 
         document.getElementById('Txt').value = "";
         console.log(Msg);
-
 
         let CurrentDate = new Date();
         var time = CurrentDate.toLocaleTimeString([], {
@@ -536,10 +567,17 @@
             ReMsg = "Are you kidding?! You're an unstoppable legend in the making! The world ain't ready!";
         } else if (Msg == "okay.then bye see you later!") {
             ReMsg = "Catch you later!" + "&#128075;" + "Take care and come back anytime you want to chat." + "&#128513;";
+        } else if (Usermsg[4] == "/" && Usermsg[7] == "/") {
+            console.log(Usermsg);
+            let Res = GetDateofBirth(Usermsg);
+            ReMsg = "Current Age is" + Res;
         } else if (Usermsg.includes("+") || Usermsg.includes("-") || Usermsg.includes("*") || Usermsg.includes("/")) {
             operators();
             ReMsg = number;
-        } else {
+        } else if (age.includes(Msg)) {
+            ReMsg = "Could you please tell me your date of birth?";
+        }
+        else {
 
             ReMsg = "Sorry i can't help you right now" + "&#128528";
         }
