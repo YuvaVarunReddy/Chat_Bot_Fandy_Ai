@@ -519,6 +519,7 @@
 
     Task = [];
     let checktodolist = false;
+    let prime;
 
     function Click1() {
         Usermsg = document.getElementById('Txt').value;
@@ -611,18 +612,34 @@
             } else if (random_num.includes(Msg)) {
                 Random_Num();
                 ReMsg = Randomnum;
-            } else if (todo.includes(Msg)) {
+            } else if (Msg == "give me 1 to 100 prime numbers") {
+                for (let number = 2; number <= 100; number++) {
+                    prime = true;
+
+                    for (let i = 2; i < number; i++) {
+                        if (number % i == 0) {
+
+                        }
+                    }
+                }
+                if (prime) {
+                    console.log(number);
+                    ReMsg = number;
+                }
+            }
+
+            else if (todo.includes(Msg)) {
                 ReMsg = "What i have to Remember";
                 checktodolist = true;
             }
             else if (Msg == "show my works") {
-                var myWorks = "<ul>";
+                var myWorks = "<ol>";
                 Task.forEach(element => {
                     console.log(element);
                     myWorks += "<li>" + element + "</li>"
 
                 });
-                myWorks += "</ul>";
+                myWorks += "</ol>";
                 ReMsg = myWorks;
             }
             else {
