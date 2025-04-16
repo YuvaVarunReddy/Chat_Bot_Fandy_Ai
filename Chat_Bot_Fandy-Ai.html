@@ -600,10 +600,11 @@
                 ReMsg = "Are you kidding?! You're an unstoppable legend in the making! The world ain't ready!";
             } else if (Msg == "okay.then bye see you later!") {
                 ReMsg = "Catch you later!" + "&#128075;" + "Take care and come back anytime you want to chat." + "&#128513;";
-            } else if (Usermsg[2] === "/" && Usermsg[5] === "/") {
+            }
+            else if (Usermsg[2] === "/" && Usermsg[5] === "/") {
                 console.log(Usermsg);
                 let Res = GetDateofBirth(Usermsg);
-                ReMsg = "Current Age is" + +Res + months + "Months" + +NumofDays + "Days";
+                ReMsg = "Current Age is " + Res + "  " + months + "Months " + "And " + NumofDays + "Days";
             } else if (Usermsg.includes("+") || Usermsg.includes("-") || Usermsg.includes("*") || Usermsg.includes("/")) {
                 operators();
                 ReMsg = number;
