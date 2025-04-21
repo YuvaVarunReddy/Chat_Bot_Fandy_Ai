@@ -403,7 +403,6 @@
 
     function weeks() {
 
-
         let Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
         let day = Days[CurrentDate.getDay()];
@@ -434,20 +433,13 @@
 
         }
 
-
         for (i = 0; i < cal.length; i++) {
             if (cal[i] === "+" || cal[i] === "-") {
-                console.log(cal[i]);
-
                 num = Number(cal[i - 1]);
-                console.log(num);
-
                 num1 = Number(cal[i + 1]);
-                console.log(num1);
 
                 if (cal[i] === "+") {
                     number = num + num1;
-                    console.log(number);
 
                 } else {
                     number = num - num1;
@@ -457,7 +449,6 @@
                 i = -1;
             }
 
-
         }
 
     }
@@ -465,37 +456,33 @@
     let today;
     let months;
     let NumofDays;
+    let d = "";
+
     function GetDateofBirth(UserMsg) {
 
         let birth;
-
         birth = Usermsg.split("/");
-
-        // console.log(birth[0]);
-        // var DateofBirth = birth[0] + birth[1] + birth[2];
-
-
-
-
 
         var CurrentDate = new Date();
         var day = Number(birth[0]);
         var month = Number(birth[1]) - 1;
         var year = Number(birth[2]);
-        console.log(month);
-        console.log(day);
+
         var Age = CurrentDate.getFullYear() - year;
+        months = CurrentDate.getMonth() - month;
+        NumofDays = CurrentDate.getDate() - day;
 
-        months = Age * 12;
-        console.log(months);
 
-        NumofDays = Age * 365;
-        console.log(NumofDays);
+        if (NumofDays < 0) {
+            months -= 1
 
-        if (CurrentDate.getMonth() < month || (CurrentDate.getMonth() == month && CurrentDate.getDate() < day)) {
-            Age--;
+            var monthsDays = new Date(year, months, 0).getDate();
+            NumofDays += monthsDays;
         }
-        // console.log(Age);
+        if (months < 0) {
+            Age -= 1
+            months += 12
+        }
 
         return Age;
 
@@ -506,19 +493,21 @@
         Randomnum = Math.ceil(Randomnum);
         return Randomnum;
     }
+    function Table(Usermsg) {
 
-    // function todolist() {
+        let NUM = Usermsg;
+        let tables = "";
+        for (i = 1; i <= 10; i++) {
+            tables += NUM + "*" + i + "=" + NUM * i + "<br>";
 
-    //     Usermsg = document.getElementById('Txt').value;
-    //     if (Msg == "todo list") {
-    //         Task.push(Usermsg);
-    //     }
-
-
-    // }
+        }
+        return tables;
+    }
 
     Task = [];
     let checktodolist = false;
+    let TablesNum = false;
+
     let prime;
 
     function Click1() {
@@ -526,7 +515,6 @@
         let Msg = Usermsg.toLowerCase();
 
         document.getElementById('Txt').value = "";
-        console.log(Msg);
 
         let CurrentDate = new Date();
         var time = CurrentDate.toLocaleTimeString([], {
@@ -545,12 +533,16 @@
         NewArray.push(SentMessage);
         count += 1;
         let ReMsg = "";
-        if (!checktodolist) {
+        if (!checktodolist && !TablesNum) {
 
             if (Array1.includes(Msg)) {
                 ReMsg = "Hello.How can i help you";
-            }
-            else if (Msg == "what is your name") {
+            } else if (Msg == "tables") {
+                ReMsg = "Which table do you want!";
+                TablesNum = true;
+                console.log(TablesNum);
+
+            } else if (Msg == "what is your name") {
                 ReMsg = "I'm Fandy Bot Ai.And you";
             } else if (Msg == "yuva") {
                 ReMsg = "Ohh Nice " + "&#128522;" + "Yuva is a Nice Name";
@@ -644,18 +636,30 @@
                 ReMsg = myWorks;
             }
             else {
+                console.log(TablesNum);
+
                 ReMsg = "Sorry i can't help you right now" + "&#128528";
             }
         } else {
-            if (Msg == "stop") {
-                ReMsg = "Done";
-                checktodolist = false;
+            if (checktodolist) {
+                if (Msg == "stop") {
+                    ReMsg = "Done";
+                    checktodolist = false;
 
-            }
-            else {
-                Task.push(Msg);
-                ReMsg = "ok";
-                console.log(Task);
+                }
+                else {
+                    Task.push(Msg);
+                    ReMsg = "ok";
+                    console.log(Task);
+                }
+
+
+            } else if (TablesNum) {
+            } if (Msg == "stop") {
+                ReMsg = "Done";
+                TablesNum = false;
+            } else if (Msg > 1 && Msg <= 20) {
+                ReMsg = Table(Msg);
             }
 
         }
@@ -671,7 +675,6 @@
 
         console.log(NewArray);
 
-
         let ChatofText = "";
 
         NewArray.forEach(element => {
@@ -684,13 +687,10 @@
                     + element.Msg + '<br>' + element.date + "</div> </div>";
             }
 
-
         });
 
         document.getElementById('ChatMsg').innerHTML = ChatofText;
         document.getElementById('Count').innerHTML = "Count:" + count;
-        console.log(count);
-
 
     }
 </script>
