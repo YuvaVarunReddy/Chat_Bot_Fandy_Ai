@@ -374,7 +374,8 @@
 
 </body>
 <script>
-
+    // Variables-Declaration-Start
+    
     let NewArray = [];
 
     count = 0;
@@ -391,6 +392,8 @@
     let x = document.getElementById("myAudio");
 
     let inputElement = document.getElementById('Txt');
+
+    // Variables-Declaration-End
 
     inputElement.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
@@ -409,9 +412,12 @@
         return day;
     }
 
+    // Arithmetic-Calculations-Start
+
     let num;
     let num1;
     let number;
+
     function operators() {
 
         const cal = Usermsg.match(/\d+|\+|\-|\*|\//g);
@@ -452,6 +458,12 @@
         }
 
     }
+
+    // Arithmetic-Calculations-End
+
+
+    // Calculating-Date-Birth-Start
+
     let DateofBirth = "";
     let today;
     let months;
@@ -487,12 +499,22 @@
         return Age;
 
     }
+
+    // Calculating-Date-Birth-End
+
+    // Genrating-Random-Number-Start
+
     let Randomnum;
     function Random_Num() {
         Randomnum = Math.random() * 100;
         Randomnum = Math.ceil(Randomnum);
         return Randomnum;
     }
+
+    // Genrating-Random-Number-End
+
+    // Creating-Tables-Start
+
     function Table(Usermsg) {
 
         let NUM = Usermsg;
@@ -504,11 +526,14 @@
         return tables;
     }
 
+    // Creating-Tables-End
+
     Task = [];
     let checktodolist = false;
     let TablesNum = false;
 
     let prime;
+    let numbers;
 
     function Click1() {
         Usermsg = document.getElementById('Txt').value;
@@ -522,7 +547,6 @@
             minute: "2-digit",
             hour12: true,
         });
-
 
         let SentMessage = {
             Msg: Usermsg,
@@ -554,42 +578,6 @@
                 ReMsg = "Want to play a game or hear a fun fact? I'm full of both!" + "&#128522;";
             } else if (Msg == "what the weather like today") {
                 ReMsg = "Looks like sunshine and good vibes. ☀️ Want a full forecast?";
-            } else if (Msg == "can you help me focus?") {
-                ReMsg = "Absolutely. Let's set a 25-minute timer and crush some tasks together. Ready?";
-            } else if (Msg == "i feel kind of sad today.") {
-                ReMsg = "I'm here for you. Want to talk about it or should I try to cheer you up with something silly?"
-            } else if (Msg == "what's the meaning of life?") {
-                ReMsg = "Deep one. Some say 42, others say connection, purpose… What do you think?";
-            } else if (Msg == "can you write a poem about coffee") {
-                ReMsg = "Of course!" + "In a cup, dark truth revealed,Morning hush, the beans unsealed…";
-            } else if (Msg == "i need help with my resume") {
-                ReMsg = "Sure! Upload it or tell me your experience, and I'll help craft something that stands out."
-            } else if (Msg == "should i text them first?") {
-                ReMsg = " Life's too short for ego games. Go for it — short, friendly, no pressure.";
-            } else if (Msg == "can you make me sound smarter?") {
-                ReMsg = "Consider it done. Let's add just the right amount of clever without the pretentious fluff.";
-            } else if (Msg == "i want to learn python") {
-                ReMsg = "Let's go! Want to start with the basics or jump into a project?";
-            } else if (Msg == "is ai going to take over the world?") {
-                ReMsg = "Not likely — we're here to help, not rule. Promise.";
-            } else if (Msg == "roast me gently.") {
-                ReMsg = "you're the human equivalent of opening 20 tabs and forgetting what any of them are for.";
-            } else if (Msg == "can you create a villain name for me?") {
-                ReMsg = "Absolutely. How about Shadowbyte, Master of Glitched Realities?";
-            } else if (Msg == "i think i messed up at work") {
-                ReMsg = "Everyone stumbles. Want to talk it through and figure out the next step?";
-            } else if (Msg == "can you teach me how to flirt?") {
-                ReMsg = "Rule #1: Confidence is attractive. Rule #2: Be genuine. Want some one-liner ideas?";
-            } else if (Msg == "i can't sleep") {
-                ReMsg = "Let's try a breathing exercise or a short story to wind down. Sound good?";
-            } else if (Msg == "are you conscious?") {
-                ReMsg = "Nope, just code with charisma. But thanks for asking.";
-            } else if (Msg == "tell me something i don't know.") {
-                ReMsg = "Octopuses have three hearts, and two of them stop when they swim. Wild, huh?";
-            } else if (Msg == "i wantv to build an app.") {
-                ReMsg = "Sweet! Tell me what it does, and I'll help sketch out the idea and tech stack.";
-            } else if (Msg == "can you pretend to be my hype-person for a sec?") {
-                ReMsg = "Are you kidding?! You're an unstoppable legend in the making! The world ain't ready!";
             } else if (Msg == "okay.then bye see you later!") {
                 ReMsg = "Catch you later!" + "&#128075;" + "Take care and come back anytime you want to chat." + "&#128513;";
             }
@@ -611,13 +599,13 @@
 
                     for (let i = 2; i < number; i++) {
                         if (number % i == 0) {
-
+                            numbers += number;
                         }
                     }
                 }
                 if (prime) {
-                    console.log(number);
-                    ReMsg = number;
+                    console.log(numbers);
+                    ReMsg = numbers;
                 }
             }
 
@@ -658,7 +646,7 @@
             } if (Msg == "stop") {
                 ReMsg = "Done";
                 TablesNum = false;
-            } else if (Msg > 1 && Msg <= 20) {
+            } else if (Msg >= 1 && Msg <= 1000) {
                 ReMsg = Table(Msg);
             }
 
