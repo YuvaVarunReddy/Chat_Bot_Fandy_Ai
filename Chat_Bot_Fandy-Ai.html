@@ -276,7 +276,7 @@
             color: rgba(14, 14, 14, 0.6);
         }
 
-        button {
+        .button {
             background: linear-gradient(135deg,
                     rgb(117, 158, 158),
                     rgba(120, 172, 172, 0.2));
@@ -297,7 +297,7 @@
                 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
-        button:hover {
+        .button:hover {
             background: linear-gradient(135deg,
                     rgba(14, 165, 233, 0.4),
                     rgba(13, 148, 136, 0.3));
@@ -355,12 +355,14 @@
             <h4 id="Count"></h4>
         </div>
 
+        <button type="button" class="button">Delete ALL</button>
+
         <div class="messages" id="ChatMsg"></div>
 
         <div class="input-area">
             <div class="input-container">
                 <input type="" placeholder="Type your message..." id="Txt">
-                <button type="button" id="btn" onclick="Click1()">➤</button>
+                <button class="button" type="button" id="btn" onclick="Click1()">➤</button>
             </div>
         </div>
     </div>
@@ -375,7 +377,7 @@
 </body>
 <script>
     // Variables-Declaration-Start
-    
+
     let NewArray = [];
 
     count = 0;
@@ -528,6 +530,7 @@
 
     // Creating-Tables-End
 
+
     Task = [];
     let checktodolist = false;
     let TablesNum = false;
@@ -661,6 +664,9 @@
         NewArray.push(ReMessage);
         count += 1;
 
+
+
+
         console.log(NewArray);
 
         let ChatofText = "";
@@ -668,7 +674,7 @@
         NewArray.forEach(element => {
             if (element.type == "sent") {
                 ChatofText += "<div class=\"message user\"><div class=\"avatar user-avatar\">U</div> <div class=\"message-content\">"
-                    + element.Msg + '<br>' + element.date + "</div> </div>";
+                    + element.Msg + '<br>' + element.date + '<button type=\"button\" onclick="MsgDelete()">&#128465;</button>' + "</div> </div>";
                 x.play();
             } else {
                 ChatofText += "<div class=\"message bot\"><div class=\"avatar bot-avatar\">Fandy</div> <div class=\"message-content\">"
@@ -681,6 +687,40 @@
         document.getElementById('Count').innerHTML = "Count:" + count;
 
     }
+    // Delete-Function-Start
+
+
+
+
+    // MsgDelete();
+
+    // function MsgDelete() {
+
+    //     const index = NewArray.findIndex(Msg => Msg.type === "sent");
+    //     if (index !== -1) {
+
+    //         NewArray.splice(index, 1);
+    //         console.log("After Deletion:", NewArray);
+    //     } else {
+    //         // console.log("Sent message not found");
+    //     }
+
+    // }
+
+    function MsgDelete() {
+        for (let i = 0; i < NewArray.length; i++) {
+            if (NewArray[i].Msg === Usermsg && NewArray[i].type === "sent") {
+
+                NewArray.splice(i,1);
+                console.log("Message deleted:", NewArray);
+                return;
+            }
+        }
+        // console.log("ERROR");
+    }
+    MsgDelete(); 
+
+    // Delete-Function-End
 </script>
 
 </html>
